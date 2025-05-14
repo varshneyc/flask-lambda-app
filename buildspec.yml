@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.9
+    commands:
+      - pip install --upgrade pip
+      - pip install aws-sam-cli
+  build:
+    commands:
+      - sam build
+  post_build:
+    commands:
+      - sam package --s3-bucket YOUR_S3_BUCKET_NAME --output-template-file packaged.yaml
+      - sam deploy --template-file packaged.yaml --stack-name flask-lambda-stack --capabilities CAPABILITY_IAM
+artifacts:
+  files:
+    - packaged.yaml
