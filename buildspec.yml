@@ -12,7 +12,7 @@ phases:
       - sam build
   post_build:
     commands:
-      - sam package --s3-bucket YOUR_S3_BUCKET_NAME --output-template-file packaged.yaml
+      - sam package --s3-bucket chirags3flasktest --output-template-file packaged.yaml
       - sam deploy --template-file packaged.yaml --stack-name flask-lambda-stack --capabilities CAPABILITY_IAM
 artifacts:
   files:
