@@ -1,0 +1,25 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.9
+    commands:
+      - echo "Installing dependencies..."
+      - pip install --upgrade pip
+      - mkdir -p package
+      - pip install -r requirement.txt -t package/
+      - cp app.py package/
+  build:
+    commands:
+      - echo "Zipping the application..."
+      - cd package
+      - zip -r ../flask-app.zip .
+  post_build:
+    commands:
+      - echo "Uploading to S3..."
+      - aws s3 cp ../flask-app.zip s3://chirags3flasktest/flask-app.zip
+
+artifacts:
+  files:
+    - flask-app.zip
