@@ -12,7 +12,7 @@ phases:
     commands:
       - echo Packaging application...
       - mkdir -p temp
-      - rsymc -av --exclude=build --exclude=temp ./ temp/
+      - rsync -av --exclude=build --exclude=temp ./ temp/
       - cp -r temp/* build/
       - cd build
       - zip -r ../flask-app.zip .
