@@ -1,0 +1,19 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.9
+    commands:
+      - echo Installing dependencies...
+      - pip install -r requirements.txt -t build/
+  build:
+    commands:
+      - echo Packaging application...
+      - cp -r * build/
+      - cd build
+      - zip -r ../flask-app.zip .
+artifacts:
+  files:
+    - flask-app.zip
+ 
