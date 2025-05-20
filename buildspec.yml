@@ -6,12 +6,14 @@ phases:
       python: 3.9
     commands:
       - echo Installing dependencies...
+      - pip install --upgrade pip
       - pip install -r requirement.txt -t build/
   build:
     commands:
       - echo Packaging application...
-      - mkdir -p build
-      - cp -r * build/
+      - mkdir -p temp
+      - rsymc -av --exclude=build --exclude=temp ./ temp/
+      - cp -r temp/* build/
       - cd build
       - zip -r ../flask-app.zip .
 artifacts:
