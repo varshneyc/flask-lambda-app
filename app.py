@@ -1,5 +1,5 @@
 from flask import Flask
-from mangum import Mangum  
+from aws_lambda_wsgi import response  
 
 app = Flask(__name__)
 
@@ -7,4 +7,5 @@ app = Flask(__name__)
 def hello():
     return "Hello from Flask on Lambda!"
 
-handler = Mangum(app)
+def handler(event,context):
+    return response(app, event, context)
