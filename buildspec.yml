@@ -6,7 +6,7 @@ phases:
       python: 3.9
     commands:
       - echo Installing dependencies...
-      - pip install -r requirements.txt -t build/
+      - pip install -r requirement.txt -t build/
   build:
     commands:
       - echo Packaging application...
