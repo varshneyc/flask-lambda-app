@@ -4,10 +4,9 @@ phases:
   install:
     runtime-versions:
       python: 3.9
-  build:
     commands:
-      - echo "Deploying to Lambda..."
-      - aws lambda update-function-code \
-          --function-name flaskLambdaApp \
-          --s3-bucket chirags3flasktest \
-          --s3-key flask-app.zip
+      - echo Deploying to Lambda...
+      - aws lambda update-function-code --function-name flaskLambdaApp --zip-file fileb://flask-app.zip
+
+artifacts:
+  files: []

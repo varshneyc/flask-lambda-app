@@ -5,11 +5,21 @@ phases:
     runtime-versions:
       python: 3.9
     commands:
-      - pip install -r requirement.txt -t .
+      - echo Installing dependencies...
+      - pip install --upgrade pip
+      - pip install -r requirements.txt -t build/
+
   build:
     commands:
-      - zip -r flask-app.zip . -x "buildspec-build.yml"
-      - aws s3 cp flask-app.zip s3://chirags3flasktest/flask-app.zip
+      - echo Packaging application...
+      - mkdir -p temp
+      - rsync -av --exclude=build --exclude=temp ./ temp/
+      - cp -r temp/* build/
+      - cd build
+      - zip -r ../flask-app.zip .
+      - cd ..
+
 artifacts:
   files:
     - flask-app.zip
+  discard-paths: yes
